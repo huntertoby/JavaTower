@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import Panels.*;
 import Tower.Tower;
+import enemy.*;
 
 public class TowerDefenseGame extends JPanel implements ActionListener, MouseListener {
     private TileMap tileMap;
     private MapPanel mapPanel;
-    private List<Tower> towers;
+    private List<Tower> towers = new ArrayList<>();;
+    private List<Enemy> enemies = new ArrayList<>();;
     private Timer timer;
 
     // 遊戲狀態
@@ -42,8 +44,6 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             e.printStackTrace();
         }
 
-        towers = new ArrayList<>();
-
         // 初始化地圖面板
         add(new JScrollPane(mapPanel), BorderLayout.CENTER);
 
@@ -72,9 +72,14 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
 
         add(sidebar, BorderLayout.EAST);
 
+        this.enemies.add(new Enemy(tileMap));
+        mapPanel.setEnemies(enemies);
+
         // 初始化計時器
         timer = new Timer(16, this); // 約60 FPS
         timer.start();
+        repaint();
+
     }
 
     /**
@@ -99,12 +104,9 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             towers.add(new Tower(selectedTileX,selectedTileY,mapPanel.getTileWidth(),mapPanel.getTileHeight(),"asset/tower/tower1.png"));
             System.out.println("已建造塔");
             controlButtonsPanel.setBuyUpgradeButtonText("升級");
+
         }
         mapPanel.setTowers(towers);
-
-
-
-        repaint();
     }
 
     /**
@@ -181,10 +183,17 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         frame.setSize(1200, 1000); // 擴展窗口大小以容納側邊欄
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (Enemy enemy: enemies) {
+            enemy.update();
+            repaint();
+        }
+//        System.out.println("AA");
+
 
     }
 }

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 import Tower.Tower;
+import enemy.Enemy;
 
 public class MapPanel extends JPanel {
     private TileMap tileMap;
@@ -21,6 +22,7 @@ public class MapPanel extends JPanel {
     private int selectedTileX = -1;
     private int selectedTileY = -1;
     private List<Tower> towers;
+    private List<Enemy> enemies;
 
     public MapPanel(TileMap tileMap, String mapImagePath) throws IOException {
         this.tileMap = tileMap;
@@ -60,16 +62,19 @@ public class MapPanel extends JPanel {
 
             int drawX = selectedTileX * tileWidth;
             int drawY = selectedTileY * tileHeight;
-
-            System.out.println(drawX);
-            System.out.println(drawY);
-
             g.drawImage(selectedTowerImage, drawX, drawY, tileWidth, tileHeight, null);
         }
-        if (this.towers == null) return;
-        for (Tower tower : this.towers) {
-            tower.render(g);
+        if (this.towers != null) {
+            for (Tower tower : this.towers) {
+                tower.render(g);
+            }
         }
+        if (this.enemies != null) {
+            for (Enemy enemy : this.enemies) {
+                enemy.render(g);
+            }
+        }
+
 
     }
 
@@ -85,4 +90,8 @@ public class MapPanel extends JPanel {
     public void setTowers(List<Tower> towers) {
         this.towers = towers;
     }
+
+    public List<Tower> getTowers() { return towers; }
+
+    public void setEnemies(List<Enemy> enemies) { this.enemies = enemies; }
 }
