@@ -28,6 +28,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
     // 選中的塔
     private Tower selectedTower = null;
     private boolean selectedTowerSpot;
+
     private int selectedTileX = -1;
     private int selectedTileY = -1;
 
@@ -94,9 +95,10 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
      * 處理購買或升級塔的邏輯
      */
     private void handleBuyUpgrade() {
-        if (selectedTower == null && selectedTowerSpot) {
+        if (selectedTower == null && selectedTowerSpot && !checkTowers(selectedTileX, selectedTileY)) {
             towers.add(new Tower(selectedTileX,selectedTileY,mapPanel.getTileWidth(),mapPanel.getTileHeight(),"asset/tower/tower1.png"));
-            System.out.println("已建造塔+");
+            System.out.println("已建造塔");
+            controlButtonsPanel.setBuyUpgradeButtonText("升級");
         }
         mapPanel.setTowers(towers);
 
