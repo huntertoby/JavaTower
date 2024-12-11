@@ -17,12 +17,11 @@ public class MapPanel extends JPanel {
     private TileMap tileMap;
     private BufferedImage mapImage;
     private BufferedImage selectedTowerImage;
-    private int tileWidth = 60;
-    private int tileHeight = 60;
+    public static int tileWidth = 60;
+    public static int tileHeight = 60;
     private int selectedTileX = -1;
     private int selectedTileY = -1;
-    private List<Tower> towers;
-    private List<Enemy> enemies;
+
 
     public MapPanel(TileMap tileMap, String mapImagePath) throws IOException {
         this.tileMap = tileMap;
@@ -64,34 +63,17 @@ public class MapPanel extends JPanel {
             int drawY = selectedTileY * tileHeight;
             g.drawImage(selectedTowerImage, drawX, drawY, tileWidth, tileHeight, null);
         }
-        if (this.towers != null) {
-            for (Tower tower : this.towers) {
+        if (TowerDefenseGame.towers != null) {
+            for (Tower tower : TowerDefenseGame.towers) {
                 tower.render(g);
             }
         }
-        if (this.enemies != null) {
-            for (Enemy enemy : this.enemies) {
+        if (TowerDefenseGame.enemies != null) {
+            for (Enemy enemy : TowerDefenseGame.enemies) {
                 enemy.render(g);
             }
         }
 
 
     }
-
-    // Getter 方法
-    public int getTileWidth() {
-        return tileWidth;
-    }
-
-    public int getTileHeight() {
-        return tileHeight;
-    }
-
-    public void setTowers(List<Tower> towers) {
-        this.towers = towers;
-    }
-
-    public List<Tower> getTowers() { return towers; }
-
-    public void setEnemies(List<Enemy> enemies) { this.enemies = enemies; }
 }

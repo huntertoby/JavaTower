@@ -1,0 +1,256 @@
+{
+    "towers": [
+        {
+            "name": "Basic Tower",
+            "imagePath": "asset/tower/tower1.png",
+            "range": 200.0,
+            "damage": 25.0,
+            "fireRate": 1,
+            "fireCooldown": 0.67,
+            "levels": {
+                "1": {
+                    "range": 100.0,
+                    "damage": 10.0,
+                    "fireRate": 1.5,
+                    "fireCooldown": 0.67
+                },
+                "2": {
+                    "range": 120.0,
+                    "damage": 12.0,
+                    "fireRate": 1.8,
+                    "fireCooldown": 0.56
+                },
+                "3": {
+                    "range": 150.0,
+                    "damage": 15.0,
+                    "fireRate": 2.0,
+                    "fireCooldown": 0.5
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "range": 200.0,
+            "damage": 50.0,
+            "fireRate": 0.5,
+            "fireCooldown": 2.0,
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0
+                },
+                "2": {
+                    "range": 250.0,
+                    "damage": 60.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.67
+                },
+                "3": {
+                    "range": 300.0,
+                    "damage": 75.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25
+                }
+            }
+        }
+    ]
+}

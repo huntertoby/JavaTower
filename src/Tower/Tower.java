@@ -1,5 +1,9 @@
 package Tower;
 
+
+import enemy.Enemy;
+import src.MapPanel;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -8,7 +12,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
-
+import java.util.List;
+import src.MapPanel;
 
 /**
  * Tower 類別代表塔防遊戲中的一個塔。
@@ -27,6 +32,8 @@ public class Tower {
     private int pixelX;
     private int pixelY;
 
+    private String towerName;
+
     // 屬性
     private double range;          // 攻擊範圍（像素）
     private double damage;         // 每次攻擊的傷害
@@ -42,6 +49,8 @@ public class Tower {
 
     private double angle;
 
+    private Enemy currentTarget;
+
     // 常量
     private static final double DEFAULT_RANGE = 150.0;
     private static final double DEFAULT_DAMAGE = 25.0;
@@ -56,16 +65,13 @@ public class Tower {
         CLOSEST   // 最近的敵人
     }
 
-    public Tower(int tileX, int tileY, int tileWidth, int tileHeight, String imagePath) {
+    public Tower(int tileX, int tileY, String imagePath) {
         this.tileX = tileX;
         this.tileY = tileY;
-        this.tileWidth = tileWidth;
-        this.tileHeight = tileHeight;
+        this.tileWidth = MapPanel.tileWidth;
+        this.tileHeight = MapPanel.tileHeight;
         this.pixelX = tileX * tileWidth;
         this.pixelY = tileY * tileHeight;
-
-
-
         this.range = DEFAULT_RANGE;
         this.damage = DEFAULT_DAMAGE;
         this.fireRate = DEFAULT_FIRE_RATE;
@@ -73,7 +79,7 @@ public class Tower {
         this.level = 1;
         this.upgradeCost = DEFAULT_UPGRADE_COST;
         this.sellValue = DEFAULT_SELL_VALUE;
-        this.targetType = TargetType.FIRST;
+        this.targetType = TargetType.CLOSEST;
         loadImage(imagePath);
     }
 
@@ -92,15 +98,6 @@ public class Tower {
      *
      * @return 升級是否成功（例如，玩家資金足夠）
      */
-    public boolean upgrade() {
-        level++;
-        range += 20.0;       // 增加攻擊範圍
-        damage += 10.0;      // 增加傷害
-        fireRate += 0.2;     // 增加攻擊速度
-        upgradeCost *= 1.5;  // 增加升級成本
-        sellValue += 25.0;   // 增加賣出價值
-        return true;
-    }
 
     /**
      * 賣出塔，返回賣出價值。
@@ -111,15 +108,97 @@ public class Tower {
         return sellValue;
     }
 
-    /**
-     * 渲染塔的圖像到畫面上。
-     *
-     * @param g 畫布的 Graphics 對象
-     */
+    public void update(double deltaTime, List<Enemy> enemies) {
+
+        // 減少冷卻時間
+        if (fireCooldown > 0) {
+            fireCooldown -= deltaTime;
+        }
+
+        // 如果當前目標不在範圍內，尋找新目標
+        if (currentTarget != null && !isInRange(currentTarget)) {
+            currentTarget = acquireTarget(enemies);
+
+        }
+
+        // 如果沒有目標，嘗試獲取新的目標
+        if (currentTarget == null) {
+            currentTarget = acquireTarget(enemies);
+        }
+
+        // 如果有目標，旋轉並攻擊
+        if (currentTarget != null) {
+
+            // 計算目標的中心點
+            double targetCenterX = currentTarget.getX() + currentTarget.getWidth() / 2.0;
+            double targetCenterY = currentTarget.getY() + currentTarget.getHeight() / 2.0;
+
+            // 計算塔的中心點
+            double towerCenterX = pixelX + this.tileWidth / 2.0;
+            double towerCenterY = pixelY + this.tileHeight / 2.0;
+
+            // 計算目標與塔之間的角度
+            double dx = targetCenterX - towerCenterX;
+            double dy = towerCenterY - targetCenterY;
+
+            double angleRadians = Math.atan2(dx, dy);
+
+            double angleDegrees = Math.toDegrees(angleRadians);
+
+            // 確保角度在 0 到 360 度之間
+            if(angleDegrees < 0){
+                angleDegrees += 360;
+            }
+
+            angle = angleDegrees;
+
+            // 如果冷卻時間已到，可以攻擊
+            if (fireCooldown <= 0) {
+                attack(currentTarget);
+                fireCooldown = 1.0 / fireRate; // 重置冷卻時間
+            }
+
+        }
+
+
+
+
+    }
+
+    private void attack(Enemy target) {
+
+
+
+        target.takeDamage(damage);
+        // 這裡可以添加更多效果，如播放攻擊動畫或音效
+        if (target.isDead()) {
+            currentTarget = null;
+        }
+    }
+
+
+    public boolean isInRange(Enemy enemy) {
+        double dx = (pixelX + towerImage.getWidth(null) / 2.0) - (enemy.getX() + enemy.getWidth() / 2.0);
+        double dy = (pixelY + towerImage.getHeight(null) / 2.0) - (enemy.getY() + enemy.getHeight() / 2.0);
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        return distance <= range;
+    }
+
+    private Enemy acquireTarget(List<Enemy> enemies) {
+        Enemy selected = null;
+        double minDistance = Double.MAX_VALUE;
+        double maxHealth = Double.MIN_VALUE;
+
+        for (Enemy enemy : enemies) {
+            if (!isInRange(enemy)) continue; // 超出範圍
+            selected = enemy;
+        }
+
+        return selected;
+
+    }
 
     public void render(Graphics g) {
-
-        this.angle += 45;
 
         Graphics2D g2d = (Graphics2D) g.create();
 
@@ -135,12 +214,7 @@ public class Tower {
         at.translate(centerX, centerY);
 
         // 旋轉
-        at.rotate(angle);
-
-        System.out.println(this.towerImage.getWidth(null));
-        System.out.println(this.towerImage.getHeight(null));
-
-
+        at.rotate(Math.toRadians(angle));
 
         // 縮放圖像到 tileWidth 和 tileHeight
         double scaleX = (double) this.tileWidth / this.towerImage.getWidth(null);
@@ -188,6 +262,19 @@ public class Tower {
     public int getLevel() {
         return level;
     }
+
+    public void setRange(double range) {
+        this.range = range;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public void setFireRate(double fireRate) {
+        this.fireRate = fireRate;
+    }
+
 
     public double getUpgradeCost() {
         return upgradeCost;
