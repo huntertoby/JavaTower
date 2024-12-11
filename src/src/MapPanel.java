@@ -19,18 +19,23 @@ public class MapPanel extends JPanel {
     private TileMap tileMap;
     private BufferedImage mapImage;
     private BufferedImage selectedTowerImage;
-    public static int tileWidth = 60;
-    public static int tileHeight = 60;
+    public static int tileWidth = 64;
+    public static int tileHeight = 64;
     private int selectedTileX = -1;
     private int selectedTileY = -1;
+    private List<int[]> spot;
+
+
+
+
 
 
     public MapPanel(TileMap tileMap, String mapImagePath) throws IOException {
         this.tileMap = tileMap;
         this.mapImage = ImageIO.read(new File(mapImagePath));
         this.selectedTowerImage = ImageIO.read(new File("asset/image/selected_tower.png"));
-
         this.setPreferredSize(new Dimension(tileMap.getWidth() * tileWidth, tileMap.getHeight() * tileHeight));
+        spot = tileMap.getSpot();
     }
 
     public boolean clickTower(int _selectedTileX, int _selectedTileY) {
@@ -38,7 +43,7 @@ public class MapPanel extends JPanel {
         selectedTileX = -1;
         selectedTileY = -1;
         int gid = tileMap.getTileGID(_selectedTileX, _selectedTileY);
-        if (gid == 148) {
+        if (gid == 88) {
             selectedTileX = _selectedTileX;
             selectedTileY = _selectedTileY;
             repaint();
@@ -46,14 +51,12 @@ public class MapPanel extends JPanel {
         }
         repaint();
         return false;
-
     }
 
 
 
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g);
         // 繪製整個地圖圖像
         g.drawImage(mapImage, 0, 0, tileMap.getWidth() * tileWidth, tileMap.getHeight() * tileHeight, null);
@@ -93,7 +96,7 @@ public class MapPanel extends JPanel {
                 bullet.render(g);
             }
         }
-
-
     }
+
+    public List<int[]> getSpot(){ return spot;}
 }

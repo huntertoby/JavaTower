@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/src/enemy/Enemy.java;C:/Users/tobby/IdeaProjects/JavaTower/src/Panels/ControlButtonsPanel.java;C:/Users/tobby/IdeaProjects/JavaTower/src/Panels/PlayerInfoPanel.java;C:/Users/tobby/IdeaProjects/JavaTower/src/Panels/TowerDataPanel.java;C:/Users/tobby/IdeaProjects/JavaTower/src/Panels/TowerTypeButtonPanel.java;C:/Users/tobby/IdeaProjects/JavaTower/src/src/data.java;C:/Users/tobby/IdeaProjects/JavaTower/src/src/MapPanel.java;C:/Users/tobby/IdeaProjects/JavaTower/src/src/TileMap.java;C:/Users/tobby/IdeaProjects/JavaTower/src/src/TowerDefenseGame.java;C:/Users/tobby/IdeaProjects/JavaTower/src/Tower/Bullet.java;C:/Users/tobby/IdeaProjects/JavaTower/src/Tower/Tower.java" />
+  </component>
+</project>

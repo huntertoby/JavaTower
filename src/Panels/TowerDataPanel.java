@@ -13,6 +13,7 @@ public class TowerDataPanel extends JPanel {
         setAlignmentX(Component.LEFT_ALIGNMENT);
 
         towerDataLabel = new JLabel("<html>選擇一個塔來查看數據</html>");
+        towerDataLabel.setFont(new Font("微軟正黑體",Font.PLAIN,20));
         towerDataLabel.setVerticalAlignment(SwingConstants.TOP);
 
         add(towerDataLabel, BorderLayout.CENTER);
@@ -38,6 +39,6 @@ public class TowerDataPanel extends JPanel {
     }
 
     public void warning(String message) {
-        JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+
     }
 }

@@ -1,6 +1,7 @@
 package enemy;
 
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -14,45 +15,20 @@ public class Enemy {
     private double x;
     private double y;
     // 敵人的速度(像素/更新tick)
-    private double speed = 1;
-
-    // 地圖資訊
-    private TileMap tileMap;
-    private int tileWidth;
-    private int tileHeight;
+    private double speed = 5;
 
     // 路徑：存放敵人要行走的路徑點，每個點為(tileX, tileY)
-    private List<float[]> path;
-    private int currentTargetIndex = 0; // 目前目標路徑點索引
+    private List<int[]> path;
+    private int currentTargetIndex; // 目前目標路徑點索引
 
     // 敵人尺寸（示意用，用來繪製在畫面上的大小）
     private int width = 32;
     private int height = 32;
 
-    public Enemy(TileMap tileMap) {
+    public Enemy() {
 
-
-        this.tileMap = tileMap;
-        this.tileWidth = tileMap.getWidth();
-        this.tileHeight = tileMap.getHeight();
         this.health = 50;
-        int tilePixelWidth = 64;
-        int tilePixelHeight = 64;
-
         path = new ArrayList<>();
-        path.add(new float[]{10.65F, 0f});
-        path.add(new float[]{10.65F, 4.2f});
-        path.add(new float[]{2.3F, 4.2f});
-        path.add(new float[]{2.3F, 8f});
-        path.add(new float[]{10.65F, 8f});
-        path.add(new float[]{10.65F, 11.5f});
-
-        if(!path.isEmpty()) {
-            float startTileX = path.get(0)[0];
-            float startTileY = path.get(0)[1];
-            this.x = startTileX * tilePixelWidth + tilePixelWidth / 2.0 - width/2.0;
-            this.y = startTileY * tilePixelHeight + tilePixelHeight / 2.0 - height/2.0;
-        }
     }
 
     public void update() {
@@ -61,15 +37,11 @@ public class Enemy {
         if (currentTargetIndex >= path.size()) {
             return;
         }
-        int tilePixelWidth = 64;
-        int tilePixelHeight = 64;
+
 
         // 取得目前目標點的像素位置（該tile的中心）
-        float targetTileX = path.get(currentTargetIndex)[0];
-        float targetTileY = path.get(currentTargetIndex)[1];
-
-        double targetX = targetTileX * tilePixelWidth + tilePixelWidth/2.0 - width/2.0;
-        double targetY = targetTileY * tilePixelHeight + tilePixelHeight/2.0 - height/2.0;
+        double targetX  = (double) (path.get(currentTargetIndex)[0]);
+        double targetY = (double) (path.get(currentTargetIndex)[1]);
 
         // 計算移動方向
         double dx = targetX - x;
@@ -97,13 +69,27 @@ public class Enemy {
 
 
     public void render(Graphics g) {
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        float x = (float) (this.x - width / 2);
+        float y = (float) (this.y - width / 2);
+
+
+        Ellipse2D.Float ellipse = new Ellipse2D.Float((float) x, (float) y, width, height);
+        g2d.fill(ellipse);
         // 可根據需要換成敵人貼圖
-        g.fillOval((int)x, (int)y, width, height);
 
     }
 
-    public void setPath(List<float[]> newPath) {
+    public void setPath(List<int[]> newPath) {
+
+
         this.path = newPath;
+
+        this.x = newPath.get(0)[0];
+        this.y = newPath.get(0)[1];
+
         this.currentTargetIndex = 0;
     }
 

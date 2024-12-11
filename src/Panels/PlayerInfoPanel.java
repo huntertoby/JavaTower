@@ -13,8 +13,11 @@ public class PlayerInfoPanel extends JPanel {
         setAlignmentX(Component.LEFT_ALIGNMENT);
 
         healthLabel = new JLabel("血量: " + playerHealth);
+        healthLabel.setFont(new Font("微軟正黑體",Font.PLAIN,20));
         moneyLabel = new JLabel("金錢: $" + playerMoney);
+        moneyLabel.setFont(new Font("微軟正黑體",Font.PLAIN,20));
         waveLabel = new JLabel("波數: " + currentWave);
+        waveLabel.setFont(new Font("微軟正黑體",Font.PLAIN,20));
 
         add(healthLabel);
         add(moneyLabel);

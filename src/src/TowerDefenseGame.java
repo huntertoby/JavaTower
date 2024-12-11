@@ -51,7 +51,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
 
         try {
             tileMap = new TileMap("asset/map/level1.tmj");
-            mapPanel = new MapPanel(tileMap, "asset/map/level1.png");
+            mapPanel = new MapPanel(tileMap, "asset/map/level.png");
             data = new data();
 
         } catch (Exception e) {
@@ -59,7 +59,9 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         }
 
         // 初始化地圖面板
-        add(new JScrollPane(mapPanel), BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(mapPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        add(scrollPane, BorderLayout.CENTER);
 
         mapPanel.addMouseListener(this);
 
@@ -107,11 +109,10 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         this.isRunning = !this.isRunning;
 
         if (!isRunning) {
-            controlButtonsPanel.setTimeControlButtonText("暫停");
-            timer.stop();
-
-        } else {
             controlButtonsPanel.setTimeControlButtonText("開始");
+            timer.stop();
+        } else {
+            controlButtonsPanel.setTimeControlButtonText("暫停");
             if (enemiesToSpawn == 0) {
                 currentWave++;
                 startWave();
@@ -128,12 +129,10 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         System.out.println("開始第 " + currentWave + " 波敵人！");
     }
 
-    /**
-     * 處理購買或升級塔的邏輯
-     */
+
     private void handleBuyUpgrade() {
         if (selectedTower == null && towerTypeButtonPanel.getSelectedTowerName() == null) {
-            towerDataPanel.warning("沒有選擇砲塔種類");
+            JOptionPane.showMessageDialog(null, "沒有選擇砲塔類型", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -141,13 +140,12 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             Tower tower = data.createTower(towerTypeButtonPanel.getSelectedTowerName(),1,selectedTileX,selectedTileY);
             towers.add(tower);
             selectedTower = tower;
-            System.out.println("已建造塔");
             controlButtonsPanel.setBuyUpgradeButtonText("升級");
             towerDataPanel.updateTowerData(selectedTower);
         }else if (selectedTower != null) {
 
             if (selectedTower.getMaxLevel() == selectedTower.getLevel()) {
-                towerDataPanel.warning("已升級到最高級");
+
                 return;
             }
 
@@ -163,31 +161,17 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
 
             towers.add(upgradedTower);
             selectedTower = upgradedTower;
-            System.out.println("塔已升級");
             towerDataPanel.updateTowerData(selectedTower);
         }
         repaint();
     }
 
-    /**
-     * 處理賣出塔的邏輯
-     */
+
     private void handleSell() {
 
-        for (Tower tower: towers) {
-            for (Enemy enemy: enemies) {
-                {
-                    tower.isInRange(enemy);
-                }
-            }
-
-        }
 
     }
 
-    /**
-     * 更新側邊欄的玩家資訊和塔的數據
-     */
     private void updateSidebar() {
         playerInfoPanel.updateInfo(playerHealth, playerMoney, currentWave);
         towerDataPanel.updateTowerData(selectedTower);
@@ -225,14 +209,12 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             if (checkTowers(selectedTileX, selectedTileY)){
                 controlButtonsPanel.setBuyUpgradeButtonText("升級");
             }else {
-                System.out.println("這裡是塔格但沒塔");
                 towerDataPanel.choseToBuild();
                 controlButtonsPanel.setBuyUpgradeButtonText("購買");
             }
 
         }else{
             selectedTowerSpot = false;
-            System.out.println("這裡沒塔格");
             towerDataPanel.updateTowerData(null);
         }
 
@@ -256,7 +238,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         JFrame frame = new JFrame("塔防遊戲");
         TowerDefenseGame game = new TowerDefenseGame();
         frame.add(game);
-        frame.setSize(1200, 1000); // 擴展窗口大小以容納側邊欄
+        frame.setSize(1280, 1010); // 擴展窗口大小以容納側邊欄
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -294,7 +276,9 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             if (enemiesToSpawn > 0) {
                 spawnTimer += deltaTime;
                 if (spawnTimer >= spawnInterval) {
-                    enemies.add(new Enemy(tileMap));
+                    Enemy enemy = new Enemy();
+                    enemy.setPath(tileMap.getSpot());
+                    enemies.add(enemy);
                     enemiesToSpawn--;
                     spawnTimer = 0.0;
                     System.out.println("生成一隻敵人，剩餘：" + enemiesToSpawn);
@@ -308,6 +292,9 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             System.out.println("enemies.isEmpty() && isRunning");
             timer.stop();
             isRunning = false;
+            controlButtonsPanel.setTimeControlButtonText("開始");
+            playerInfoPanel.updateInfo(playerHealth,currentWave,currentWave);
+            bullets.clear();
         }
 
 

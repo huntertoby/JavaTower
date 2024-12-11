@@ -43,7 +43,6 @@ public class Tower {
 
     private int level;             // 塔的等級
     private int maxLevel;             // 塔的等級
-    private double upgradeCost;    // 升級所需金額
     private double sellValue;      // 賣出塔可獲得的金額
 
     private TargetType targetType; // 目標選擇類型
@@ -53,12 +52,7 @@ public class Tower {
 
     private Enemy currentTarget;
 
-    // 常量
-    private static final double DEFAULT_RANGE = 150.0;
-    private static final double DEFAULT_DAMAGE = 25.0;
-    private static final double DEFAULT_FIRE_RATE = 1.0; // 每秒1次
-    private static final double DEFAULT_UPGRADE_COST = 100.0;
-    private static final double DEFAULT_SELL_VALUE = 50.0;
+
 
     public enum TargetType {
         FIRST,    // 最先進入的敵人
@@ -74,13 +68,7 @@ public class Tower {
         this.tileHeight = MapPanel.tileHeight;
         this.pixelX = tileX * tileWidth;
         this.pixelY = tileY * tileHeight;
-        this.range = DEFAULT_RANGE;
-        this.damage = DEFAULT_DAMAGE;
-        this.fireRate = DEFAULT_FIRE_RATE;
-        this.fireCooldown = 0.0;
         this.level = 1;
-        this.upgradeCost = DEFAULT_UPGRADE_COST;
-        this.sellValue = DEFAULT_SELL_VALUE;
         this.targetType = TargetType.CLOSEST;
         loadImage(imagePath);
     }
@@ -293,11 +281,6 @@ public class Tower {
 
     public int getMaxLevel() {
         return maxLevel;
-    }
-
-
-    public double getUpgradeCost() {
-        return upgradeCost;
     }
 
     public double getSellValue() {

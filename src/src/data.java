@@ -14,11 +14,11 @@ public class data {
 
     static public JSONArray towerArray;
 
+
     public data () throws IOException {
         String content = new String(Files.readAllBytes(Paths.get("asset/tower/tower.tmj")), "UTF-8");
-        JSONObject map = new JSONObject(content);
-
-        towerArray = map.getJSONArray("towers");
+        JSONObject towers = new JSONObject(content);
+        towerArray = towers.getJSONArray("towers");
     }
 
     public JSONArray getTowers() { return towerArray; }
