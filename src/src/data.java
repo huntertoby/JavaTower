@@ -12,7 +12,7 @@ import Tower.Tower;
 
 public class data {
 
-    private JSONArray towerArray;
+    static public JSONArray towerArray;
 
     public data () throws IOException {
         String content = new String(Files.readAllBytes(Paths.get("asset/tower/tower.tmj")), "UTF-8");
@@ -28,6 +28,7 @@ public class data {
             JSONObject towerData = towerArray.getJSONObject(i);
 
             if (towerData.getString("name").equalsIgnoreCase(name)) {
+
                 JSONObject levelData = towerData.getJSONObject("levels").getJSONObject(String.valueOf(level));
 
                 Tower tower = new Tower(
@@ -37,6 +38,8 @@ public class data {
                 );
 
                 // 設置屬性
+                tower.setMaxLevel(towerData.getInt("MaxLevel"));
+                tower.setLevel(level);
                 tower.setRange(levelData.getDouble("range"));
                 tower.setDamage(levelData.getDouble("damage"));
                 tower.setFireRate(levelData.getDouble("fireRate"));
@@ -45,5 +48,17 @@ public class data {
             }
         }
         throw new IllegalArgumentException("無法找到名稱為 " + name + " 的塔或等級無效");
+    }
+
+    public static int getRange( String towerName ,int level ) {
+        for (int i = 0; i < towerArray.length(); i++) {
+
+            JSONObject towerData = towerArray.getJSONObject(i);
+            if (towerData.getString("name").equalsIgnoreCase(towerName)) {
+                JSONObject levelData = towerData.getJSONObject("levels").getJSONObject(String.valueOf(level));
+                return levelData.getInt("range");
+            }
+        }
+        return -1;
     }
 }

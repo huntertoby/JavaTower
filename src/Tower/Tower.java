@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.util.List;
 import src.MapPanel;
+import src.TowerDefenseGame;
 
 /**
  * Tower 類別代表塔防遊戲中的一個塔。
@@ -41,6 +42,7 @@ public class Tower {
     private double fireCooldown;   // 攻擊冷卻時間
 
     private int level;             // 塔的等級
+    private int maxLevel;             // 塔的等級
     private double upgradeCost;    // 升級所需金額
     private double sellValue;      // 賣出塔可獲得的金額
 
@@ -118,7 +120,6 @@ public class Tower {
         // 如果當前目標不在範圍內，尋找新目標
         if (currentTarget != null && !isInRange(currentTarget)) {
             currentTarget = acquireTarget(enemies);
-
         }
 
         // 如果沒有目標，嘗試獲取新的目標
@@ -126,8 +127,16 @@ public class Tower {
             currentTarget = acquireTarget(enemies);
         }
 
+
+
         // 如果有目標，旋轉並攻擊
         if (currentTarget != null) {
+
+            // 如果沒有目標，嘗試獲取新的目標
+            if (currentTarget.isDead()) {
+                currentTarget = acquireTarget(enemies);
+                return;
+            }
 
             // 計算目標的中心點
             double targetCenterX = currentTarget.getX() + currentTarget.getWidth() / 2.0;
@@ -166,15 +175,17 @@ public class Tower {
     }
 
     private void attack(Enemy target) {
+        // 計算塔中心位置
+        double towerCenterX = pixelX + this.tileWidth / 2.0;
+        double towerCenterY = pixelY + this.tileHeight / 2.0;
 
+        // 建立子彈物件
+        Bullet bullet = new Bullet(towerCenterX, towerCenterY, target, damage);
 
-
-        target.takeDamage(damage);
-        // 這裡可以添加更多效果，如播放攻擊動畫或音效
-        if (target.isDead()) {
-            currentTarget = null;
-        }
+        // 將子彈加入全域 bullets 清單
+        TowerDefenseGame.bullets.add(bullet);
     }
+
 
 
     public boolean isInRange(Enemy enemy) {
@@ -192,10 +203,9 @@ public class Tower {
         for (Enemy enemy : enemies) {
             if (!isInRange(enemy)) continue; // 超出範圍
             selected = enemy;
+            return selected;
         }
-
-        return selected;
-
+        return null;
     }
 
     public void render(Graphics g) {
@@ -273,6 +283,16 @@ public class Tower {
 
     public void setFireRate(double fireRate) {
         this.fireRate = fireRate;
+    }
+    public void setLevel(int level) {
+        this.level = level;
+    }
+    public void setMaxLevel(int maxLevel) {
+        this.maxLevel = maxLevel;
+    }
+
+    public int getMaxLevel() {
+        return maxLevel;
     }
 
 

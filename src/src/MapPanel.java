@@ -10,8 +10,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import Tower.Tower;
+import Panels.TowerTypeButtonPanel;
+import Tower.*;
 import enemy.Enemy;
+
 
 public class MapPanel extends JPanel {
     private TileMap tileMap;
@@ -51,17 +53,29 @@ public class MapPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         // 繪製整個地圖圖像
         g.drawImage(mapImage, 0, 0, tileMap.getWidth() * tileWidth, tileMap.getHeight() * tileHeight, null);
 
         // 如果有選中的塔，繪製選中的塔圖片
         if (selectedTileX != -1 && selectedTileY != -1) {
-
-
             int drawX = selectedTileX * tileWidth;
             int drawY = selectedTileY * tileHeight;
+
             g.drawImage(selectedTowerImage, drawX, drawY, tileWidth, tileHeight, null);
+
+            int centerX = selectedTileX * tileWidth + tileWidth / 2;
+            int centerY = selectedTileY * tileHeight + tileHeight / 2;
+
+            double range;
+            if (TowerDefenseGame.selectedTower != null) range = TowerDefenseGame.selectedTower.getRange();
+            else range = data.getRange(TowerTypeButtonPanel.selectedTowerName,1);
+
+            g.setColor(Color.black);
+
+            g.drawOval((int) (centerX - range), (int) (centerY - range), (int) (2 * range), (int) (2 * range));
+
         }
         if (TowerDefenseGame.towers != null) {
             for (Tower tower : TowerDefenseGame.towers) {
@@ -71,6 +85,12 @@ public class MapPanel extends JPanel {
         if (TowerDefenseGame.enemies != null) {
             for (Enemy enemy : TowerDefenseGame.enemies) {
                 enemy.render(g);
+            }
+        }
+
+        if (TowerDefenseGame.bullets != null) {
+            for (Bullet bullet : TowerDefenseGame.bullets) {
+                bullet.render(g);
             }
         }
 

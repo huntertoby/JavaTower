@@ -15,12 +15,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import Tower.Tower;
+import src.MapPanel;
+import src.TowerDefenseGame;
 
 public class TowerTypeButtonPanel extends JPanel {
 
-    private String selectedTowerName;
+    static public String selectedTowerName;
 
-    public TowerTypeButtonPanel(JSONArray towers){
+    public TowerTypeButtonPanel(JSONArray towers, TowerDefenseGame game) {
 
         setLayout(new GridLayout(3, 3, 5, 5)); // 3x3 grid with gaps
         setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -47,7 +49,8 @@ public class TowerTypeButtonPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     selectedTowerName = towerName;
-                    System.out.println("選擇的砲台名稱: " + selectedTowerName);
+                    setBorder(BorderFactory.createTitledBorder("選擇砲台類型: " + selectedTowerName));
+                    game.repaint();
                 }
             });
 

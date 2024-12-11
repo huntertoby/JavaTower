@@ -36,4 +36,8 @@ public class TowerDataPanel extends JPanel {
             this.towerDataLabel.setText("<html>選擇一個塔格來查看數據</html>");
         }
     }
+
+    public void warning(String message) {
+        JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+    }
 }

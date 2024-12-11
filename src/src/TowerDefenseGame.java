@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import Panels.*;
-import Tower.Tower;
+import Tower.*;
 import enemy.*;
+
 
 public class TowerDefenseGame extends JPanel implements ActionListener, MouseListener {
     private TileMap tileMap;
     private MapPanel mapPanel;
     public static List<Tower> towers = new ArrayList<>();;
     public static List<Enemy> enemies = new ArrayList<>();;
+    public static List<Bullet> bullets = new ArrayList<>();
+
     private Timer timer;
 
     private data data;
@@ -32,7 +35,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
     private TowerTypeButtonPanel towerTypeButtonPanel;
 
     // 選中的塔
-    private Tower selectedTower = null;
+    static public Tower selectedTower = null;
     private boolean selectedTowerSpot;
     private int selectedTileX = -1;
     private int selectedTileY = -1;
@@ -68,7 +71,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
                 e -> handleBuyUpgrade(),
                 e -> handleSell()
         );
-        towerTypeButtonPanel = new TowerTypeButtonPanel(data.getTowers());
+        towerTypeButtonPanel = new TowerTypeButtonPanel(data.getTowers(),this);
 
         // 組合側邊欄
         JPanel sidebar = new JPanel();
@@ -129,11 +132,38 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
      * 處理購買或升級塔的邏輯
      */
     private void handleBuyUpgrade() {
-        if (selectedTower == null && selectedTowerSpot && !checkTowers(selectedTileX, selectedTileY)) {
+        if (selectedTower == null && towerTypeButtonPanel.getSelectedTowerName() == null) {
+            towerDataPanel.warning("沒有選擇砲塔種類");
+            return;
+        }
 
-            towers.add(data.createTower(towerTypeButtonPanel.getSelectedTowerName(),1,selectedTileX,selectedTileY));
+        if (selectedTower == null && selectedTowerSpot && !checkTowers(selectedTileX, selectedTileY)) {
+            Tower tower = data.createTower(towerTypeButtonPanel.getSelectedTowerName(),1,selectedTileX,selectedTileY);
+            towers.add(tower);
+            selectedTower = tower;
             System.out.println("已建造塔");
             controlButtonsPanel.setBuyUpgradeButtonText("升級");
+            towerDataPanel.updateTowerData(selectedTower);
+        }else if (selectedTower != null) {
+
+            if (selectedTower.getMaxLevel() == selectedTower.getLevel()) {
+                towerDataPanel.warning("已升級到最高級");
+                return;
+            }
+
+            Tower upgradedTower = data.createTower(
+                    towerTypeButtonPanel.getSelectedTowerName(),
+                    selectedTower.getLevel() + 1,
+                    selectedTileX,
+                    selectedTileY
+            );
+
+
+            towers.remove(selectedTower);
+
+            towers.add(upgradedTower);
+            selectedTower = upgradedTower;
+            System.out.println("塔已升級");
             towerDataPanel.updateTowerData(selectedTower);
         }
         repaint();
@@ -163,7 +193,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         towerDataPanel.updateTowerData(selectedTower);
     }
 
-    private boolean checkTowers(int selectedTileX, int selectedTileY) {
+    public boolean checkTowers(int selectedTileX, int selectedTileY) {
         for (Tower tower : towers) {
             if( tower.getTileX() == selectedTileX && tower.getTileY() == selectedTileY) {
                 towerDataPanel.updateTowerData(tower);
@@ -174,6 +204,11 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         }
         selectedTower = null;
         return false;
+    }
+
+    public void repaintGame()
+    {
+        this.repaint();
     }
 
 
@@ -200,6 +235,8 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             System.out.println("這裡沒塔格");
             towerDataPanel.updateTowerData(null);
         }
+
+        repaint();
     }
 
     // 其他MouseListener方法
@@ -237,6 +274,15 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         }
         for (Tower tower: towers) {
             tower.update(0.017,enemies);
+        }
+
+        // 更新子彈
+        for (int i = bullets.size() - 1; i >= 0; i--) {
+            Bullet bullet = bullets.get(i);
+            bullet.update();
+            if (bullet.isUsed()) {
+                bullets.remove(i);
+            }
         }
 
         enemies.removeIf(Enemy::isDead);
