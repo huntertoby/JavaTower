@@ -1,22 +1,21 @@
-package src;
+package Data;
 
 import enemy.StatusType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import Tower.Tower;
 
-public class data {
+public class towerData {
 
     static public JSONArray towerArray;
 
 
-    public data () throws IOException {
+    public towerData() throws IOException {
         String content = new String(Files.readAllBytes(Paths.get("asset/tower/tower.tmj")), "UTF-8");
         JSONObject towers = new JSONObject(content);
         towerArray = towers.getJSONArray("towers");

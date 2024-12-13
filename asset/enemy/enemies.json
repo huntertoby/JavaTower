@@ -1,0 +1,64 @@
+{
+  "enemies": [
+    {
+      "name": "普通兵",
+      "shape": "circle",
+      "health": 100,
+      "baseSpeed": 1,
+      "attributes": {
+        "armor": 0,
+        "resistance": 0
+      },
+      "color": "#FF5733",
+      "reward": 100
+    },
+    {
+      "name": "速度兵",
+      "shape": "triangle",
+      "health": 80,
+      "baseSpeed": 1.5,
+      "attributes": {
+        "armor": 0,
+        "resistance": 0
+      },
+      "color": "#33FF57",
+      "reward": 200
+    },
+    {
+      "name": "坦克兵",
+      "shape": "square",
+      "health": 300,
+      "baseSpeed": 0.8,
+      "attributes": {
+        "armor": 10,
+        "resistance": 5
+      },
+      "color": "#3357FF",
+      "reward": 300
+    },
+    {
+      "name": "精英兵",
+      "shape": "star",
+      "health": 150,
+      "baseSpeed": 1.5,
+      "attributes": {
+        "armor": 5,
+        "resistance": 5
+      },
+      "color": "#FF33A6",
+      "reward": 150
+    },
+    {
+      "name": "火焰兵",
+      "shape": "circle",
+      "health": 120,
+      "baseSpeed": 1.5,
+      "attributes": {
+        "burnDamage": 5,
+        "resistance": 2
+      },
+      "color": "#FFA833",
+      "reward": 150
+    }
+  ]
+}

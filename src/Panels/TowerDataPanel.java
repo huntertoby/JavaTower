@@ -3,9 +3,8 @@ package Panels;
 import Tower.Tower;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
-import src.data;
+import Data.towerData;
 
 import org.json.JSONObject;
 
@@ -47,7 +46,7 @@ public class TowerDataPanel extends JPanel {
             if (tower.getLevel() < tower.getMaxLevel()) {
 
                 int nextLevel = tower.getLevel() + 1;
-                JSONObject levelData = data.getTowerLevelData(tower.getTowerName(),nextLevel);
+                JSONObject levelData = towerData.getTowerLevelData(tower.getTowerName(),nextLevel);
 
                 String nextType = type; // 假設屬性不變，如果可能變化需進一步處理
                 double nextRange = levelData.getDouble("range");
@@ -60,7 +59,7 @@ public class TowerDataPanel extends JPanel {
                         + "屬性: " + type + " -> "+ nextLevel + "<br>"
                         + "範圍: " + tower.getRange() + " -> "+ nextRange + "<br>"
                         + "傷害: " + tower.getDamage() + " -> "+ nextDamage + "<br>"
-                        + "攻擊速度: " + tower.getFireRate() + " -> "+ nextFireRate + "<br>"
+                        + "攻擊速度: " + tower.getFireRate() + " -> "+ nextFireRate + " 次/秒<br>"
                         + "價值: " + tower.getCostMoney() + " 元<br>"
                         + "升級價格: " + nextCost + " 元<html>";
 
@@ -77,13 +76,13 @@ public class TowerDataPanel extends JPanel {
             this.towerDataLabel.setText(towerInfo);
         } else if(TowerTypeButtonPanel.selectedTowerName != null)
         {
-            JSONObject levelData = data.getTowerLevelData(TowerTypeButtonPanel.selectedTowerName,1);
+            JSONObject levelData = towerData.getTowerLevelData(TowerTypeButtonPanel.selectedTowerName,1);
             double Range = levelData.getDouble("range");
             double Damage = levelData.getDouble("damage");
             double FireRate = levelData.getDouble("fireRate");
             double cost = levelData.getInt("cost");
 
-            type  = data.getTowerTypeString(TowerTypeButtonPanel.selectedTowerName);
+            type  = towerData.getTowerTypeString(TowerTypeButtonPanel.selectedTowerName);
 
             switch (type) {
                 case "SLOW" -> type = "緩速";

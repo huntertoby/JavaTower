@@ -2,14 +2,13 @@ package src;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import Data.towerData;
 import Panels.TowerTypeButtonPanel;
 import Tower.*;
 import enemy.Enemy;
@@ -73,7 +72,7 @@ public class MapPanel extends JPanel {
 
             double range;
             if (TowerDefenseGame.selectedTower != null) range = TowerDefenseGame.selectedTower.getRange();
-            else range = data.getRange(TowerTypeButtonPanel.selectedTowerName,1);
+            else range = towerData.getRange(TowerTypeButtonPanel.selectedTowerName,1);
 
             g.setColor(Color.black);
 

@@ -1,0 +1,186 @@
+{
+  "waves": [
+    {
+      "wave": 1,
+      "enemies": [
+        { "type": "普通兵", "count": 3 }
+      ]
+    },
+    {
+      "wave": 2,
+      "enemies": [
+        { "type": "普通兵", "count": 3 },
+        { "type": "速度兵", "count": 1 }
+      ]
+    },
+    {
+      "wave": 3,
+      "enemies": [
+        { "type": "普通兵", "count": 5 },
+        { "type": "速度兵", "count": 2 }
+      ]
+    },
+    {
+      "wave": 4,
+      "enemies": [
+        { "type": "普通兵", "count": 6 },
+        { "type": "速度兵", "count": 3 },
+        { "type": "坦克兵", "count": 1 }
+      ]
+    },
+    {
+      "wave": 5,
+      "enemies": [
+        { "type": "普通兵", "count": 8 },
+        { "type": "速度兵", "count": 4 },
+        { "type": "坦克兵", "count": 2 }
+      ]
+    },
+    {
+      "wave": 6,
+      "enemies": [
+        { "type": "普通兵", "count": 10 },
+        { "type": "速度兵", "count": 4 },
+        { "type": "坦克兵", "count": 3 },
+        { "type": "精英兵", "count": 1 }
+      ]
+    },
+    {
+      "wave": 7,
+      "enemies": [
+        { "type": "普通兵", "count": 12 },
+        { "type": "速度兵", "count": 5 },
+        { "type": "坦克兵", "count": 4 },
+        { "type": "精英兵", "count": 2 }
+      ]
+    },
+    {
+      "wave": 8,
+      "enemies": [
+        { "type": "普通兵", "count": 14 },
+        { "type": "速度兵", "count": 6 },
+        { "type": "坦克兵", "count": 5 },
+        { "type": "精英兵", "count": 3 }
+      ]
+    },
+    {
+      "wave": 9,
+      "enemies": [
+        { "type": "普通兵", "count": 16 },
+        { "type": "速度兵", "count": 6 },
+        { "type": "坦克兵", "count": 5 },
+        { "type": "精英兵", "count": 4 }
+      ]
+    },
+    {
+      "wave": 10,
+      "enemies": [
+        { "type": "普通兵", "count": 18 },
+        { "type": "速度兵", "count": 7 },
+        { "type": "坦克兵", "count": 6 },
+        { "type": "精英兵", "count": 4 },
+        { "type": "火焰兵", "count": 2 }
+      ]
+    },
+    {
+      "wave": 11,
+      "enemies": [
+        { "type": "普通兵", "count": 20 },
+        { "type": "速度兵", "count": 8 },
+        { "type": "坦克兵", "count": 6 },
+        { "type": "精英兵", "count": 5 },
+        { "type": "火焰兵", "count": 3 }
+      ]
+    },
+    {
+      "wave": 12,
+      "enemies": [
+        { "type": "普通兵", "count": 22 },
+        { "type": "速度兵", "count": 8 },
+        { "type": "坦克兵", "count": 7 },
+        { "type": "精英兵", "count": 5 },
+        { "type": "火焰兵", "count": 4 }
+      ]
+    },
+    {
+      "wave": 13,
+      "enemies": [
+        { "type": "普通兵", "count": 25 },
+        { "type": "速度兵", "count": 9 },
+        { "type": "坦克兵", "count": 8 },
+        { "type": "精英兵", "count": 6 },
+        { "type": "火焰兵", "count": 4 }
+      ]
+    },
+    {
+      "wave": 14,
+      "enemies": [
+        { "type": "普通兵", "count": 28 },
+        { "type": "速度兵", "count": 10 },
+        { "type": "坦克兵", "count": 8 },
+        { "type": "精英兵", "count": 7 },
+        { "type": "火焰兵", "count": 5 }
+      ]
+    },
+    {
+      "wave": 15,
+      "enemies": [
+        { "type": "普通兵", "count": 30 },
+        { "type": "速度兵", "count": 10 },
+        { "type": "坦克兵", "count": 9 },
+        { "type": "精英兵", "count": 8 },
+        { "type": "火焰兵", "count": 6 }
+      ]
+    },
+    {
+      "wave": 16,
+      "enemies": [
+        { "type": "普通兵", "count": 32 },
+        { "type": "速度兵", "count": 11 },
+        { "type": "坦克兵", "count": 10 },
+        { "type": "精英兵", "count": 8 },
+        { "type": "火焰兵", "count": 7 }
+      ]
+    },
+    {
+      "wave": 17,
+      "enemies": [
+        { "type": "普通兵", "count": 35 },
+        { "type": "速度兵", "count": 12 },
+        { "type": "坦克兵", "count": 10 },
+        { "type": "精英兵", "count": 9 },
+        { "type": "火焰兵", "count": 8 }
+      ]
+    },
+    {
+      "wave": 18,
+      "enemies": [
+        { "type": "普通兵", "count": 38 },
+        { "type": "速度兵", "count": 14 },
+        { "type": "坦克兵", "count": 11 },
+        { "type": "精英兵", "count": 9 },
+        { "type": "火焰兵", "count": 9 }
+      ]
+    },
+    {
+      "wave": 19,
+      "enemies": [
+        { "type": "普通兵", "count": 42 },
+        { "type": "速度兵", "count": 15 },
+        { "type": "坦克兵", "count": 12 },
+        { "type": "精英兵", "count": 10 },
+        { "type": "火焰兵", "count": 10 }
+      ]
+    },
+    {
+      "wave": 20,
+      "enemies": [
+        { "type": "普通兵", "count": 50 },
+        { "type": "速度兵", "count": 20 },
+        { "type": "坦克兵", "count": 15 },
+        { "type": "精英兵", "count": 10 },
+        { "type": "火焰兵", "count": 10 }
+      ]
+    }
+  ]
+}
