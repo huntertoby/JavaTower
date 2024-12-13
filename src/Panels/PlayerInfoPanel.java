@@ -3,6 +3,7 @@ package Panels;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class PlayerInfoPanel extends JPanel {
     private JLabel healthLabel;
     private JLabel moneyLabel;

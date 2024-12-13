@@ -2,14 +2,14 @@ package Tower;
 
 
 import enemy.Enemy;
+import enemy.StatusEffect;
+import enemy.StatusType;
 import src.MapPanel;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import javax.swing.ImageIcon;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.util.List;
@@ -52,6 +52,11 @@ public class Tower {
 
     private Enemy currentTarget;
 
+    private Color bulletColor;
+
+    private StatusType type;
+
+    private int costMoney;
 
 
     public enum TargetType {
@@ -61,15 +66,18 @@ public class Tower {
         CLOSEST   // 最近的敵人
     }
 
-    public Tower(int tileX, int tileY, String imagePath) {
+    public Tower(int tileX, int tileY, String imagePath,Color bulletColor,StatusType type,String towerName) {
+        this.towerName = towerName;
         this.tileX = tileX;
         this.tileY = tileY;
         this.tileWidth = MapPanel.tileWidth;
         this.tileHeight = MapPanel.tileHeight;
+        this.type = type;
         this.pixelX = tileX * tileWidth;
         this.pixelY = tileY * tileHeight;
         this.level = 1;
         this.targetType = TargetType.CLOSEST;
+        this.bulletColor = bulletColor;
         loadImage(imagePath);
     }
 
@@ -168,7 +176,7 @@ public class Tower {
         double towerCenterY = pixelY + this.tileHeight / 2.0;
 
         // 建立子彈物件
-        Bullet bullet = new Bullet(towerCenterX, towerCenterY, target, damage);
+        Bullet bullet = new Bullet(towerCenterX, towerCenterY, target, damage,bulletColor,type);
 
         // 將子彈加入全域 bullets 清單
         TowerDefenseGame.bullets.add(bullet);
@@ -279,8 +287,26 @@ public class Tower {
         this.maxLevel = maxLevel;
     }
 
+    public void setCostMoney(int money){
+        this.costMoney = money;
+    }
+
+    public int getCostMoney() {
+        return this.costMoney;
+    }
+
     public int getMaxLevel() {
         return maxLevel;
+    }
+
+    public StatusType getType() {
+        return type;
+    }
+
+    public String getTowerName() {
+        return towerName;
+
+
     }
 
     public double getSellValue() {

@@ -43,7 +43,7 @@ public class MapPanel extends JPanel {
         selectedTileX = -1;
         selectedTileY = -1;
         int gid = tileMap.getTileGID(_selectedTileX, _selectedTileY);
-        if (gid == 88) {
+        if (gid == 88 || gid == 126) {
             selectedTileX = _selectedTileX;
             selectedTileY = _selectedTileY;
             repaint();

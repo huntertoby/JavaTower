@@ -22,7 +22,9 @@ public class TowerTypeButtonPanel extends JPanel {
 
     static public String selectedTowerName;
 
-    public TowerTypeButtonPanel(JSONArray towers, TowerDefenseGame game) {
+    private TowerDataPanel towerDataPanel;
+
+    public TowerTypeButtonPanel(JSONArray towers, TowerDefenseGame game,TowerDataPanel towerDataPanel) {
 
         setLayout(new GridLayout(3, 3, 5, 5)); // 3x3 grid with gaps
         setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -50,6 +52,7 @@ public class TowerTypeButtonPanel extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     selectedTowerName = towerName;
                     setBorder(BorderFactory.createTitledBorder("選擇砲台類型: " + selectedTowerName));
+                    towerDataPanel.updateTowerData(null);
                     game.repaint();
                 }
             });
@@ -61,6 +64,7 @@ public class TowerTypeButtonPanel extends JPanel {
 
     public String getSelectedTowerName() {
         return selectedTowerName;
+
     }
 
 }

@@ -51,7 +51,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
 
         try {
             tileMap = new TileMap("asset/map/level1.tmj");
-            mapPanel = new MapPanel(tileMap, "asset/map/level.png");
+            mapPanel = new MapPanel(tileMap, "asset/map/level1.png");
             data = new data();
 
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
                 e -> handleBuyUpgrade(),
                 e -> handleSell()
         );
-        towerTypeButtonPanel = new TowerTypeButtonPanel(data.getTowers(),this);
+        towerTypeButtonPanel = new TowerTypeButtonPanel(data.getTowers(),this,towerDataPanel);
 
         // 組合側邊欄
         JPanel sidebar = new JPanel();
@@ -131,23 +131,42 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
 
 
     private void handleBuyUpgrade() {
-        if (selectedTower == null && towerTypeButtonPanel.getSelectedTowerName() == null) {
-            JOptionPane.showMessageDialog(null, "沒有選擇砲塔類型", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+
+        if (towerTypeButtonPanel.getSelectedTowerName() == null)
+        {JOptionPane.showMessageDialog(null, "沒有選擇砲塔類型", "Warning", JOptionPane.WARNING_MESSAGE);}
+
+        if (selectedTower == null && towerTypeButtonPanel.getSelectedTowerName() == null) {return;}
 
         if (selectedTower == null && selectedTowerSpot && !checkTowers(selectedTileX, selectedTileY)) {
+
+            int costMoney = src.data.getTowerCost(towerTypeButtonPanel.getSelectedTowerName(),1);
+
+            if (src.data.getTowerCost(towerTypeButtonPanel.getSelectedTowerName(),1) > playerMoney){
+                JOptionPane.showMessageDialog(null, "金額不足", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             Tower tower = data.createTower(towerTypeButtonPanel.getSelectedTowerName(),1,selectedTileX,selectedTileY);
+            tower.setCostMoney(costMoney);
             towers.add(tower);
             selectedTower = tower;
             controlButtonsPanel.setBuyUpgradeButtonText("升級");
             towerDataPanel.updateTowerData(selectedTower);
+            playerMoney -= costMoney;
+
         }else if (selectedTower != null) {
 
             if (selectedTower.getMaxLevel() == selectedTower.getLevel()) {
-
+                {JOptionPane.showMessageDialog(null, "已經是最高等", "Warning", JOptionPane.WARNING_MESSAGE);}
                 return;
             }
+
+            if (src.data.getTowerCost(towerTypeButtonPanel.getSelectedTowerName(),selectedTower.getLevel() + 1) > playerMoney){
+                JOptionPane.showMessageDialog(null, "金額不足", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int costMoney = src.data.getTowerCost(selectedTower.getTowerName(),selectedTower.getLevel()+1);
 
             Tower upgradedTower = data.createTower(
                     towerTypeButtonPanel.getSelectedTowerName(),
@@ -156,6 +175,10 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
                     selectedTileY
             );
 
+            upgradedTower.setCostMoney(selectedTower.getCostMoney() + costMoney);
+
+
+            playerMoney -= costMoney;
 
             towers.remove(selectedTower);
 
@@ -164,12 +187,21 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             towerDataPanel.updateTowerData(selectedTower);
         }
         repaint();
+
+        playerInfoPanel.updateInfo(playerHealth,playerMoney,currentWave);
     }
 
 
     private void handleSell() {
 
+        if (selectedTower == null) JOptionPane.showMessageDialog(null, "請選擇有效的防禦塔", "Warning", JOptionPane.WARNING_MESSAGE);
 
+        playerMoney += selectedTower.getCostMoney()*0.8;
+        towers.remove(selectedTower);
+        towerDataPanel.updateTowerData(null);
+        selectedTower = null;
+        playerInfoPanel.updateInfo(playerHealth,playerMoney,currentWave);
+        repaint();
     }
 
     private void updateSidebar() {
@@ -214,8 +246,11 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             }
 
         }else{
+            selectedTower = null;
             selectedTowerSpot = false;
             towerDataPanel.updateTowerData(null);
+            System.out.println(selectedTower);
+
         }
 
         repaint();
@@ -240,7 +275,9 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         frame.add(game);
         frame.setSize(1280, 1010); // 擴展窗口大小以容納側邊欄
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
 
     }
 
@@ -252,6 +289,10 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
 
         for (Enemy enemy: enemies) {
             enemy.update();
+            if (enemy.isEnd()) {
+                playerHealth -= 10;
+                playerInfoPanel.updateInfo(playerHealth,playerMoney,currentWave);
+            }
 
         }
         for (Tower tower: towers) {
@@ -268,6 +309,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
         }
 
         enemies.removeIf(Enemy::isDead);
+        enemies.removeIf(Enemy::isEnd);
 
 
 
@@ -276,7 +318,7 @@ public class TowerDefenseGame extends JPanel implements ActionListener, MouseLis
             if (enemiesToSpawn > 0) {
                 spawnTimer += deltaTime;
                 if (spawnTimer >= spawnInterval) {
-                    Enemy enemy = new Enemy();
+                    Enemy enemy = new Enemy(currentWave*30);
                     enemy.setPath(tileMap.getSpot());
                     enemies.add(enemy);
                     enemiesToSpawn--;

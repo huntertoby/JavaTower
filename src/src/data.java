@@ -1,5 +1,6 @@
 package src;
 
+import enemy.StatusType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,10 +32,28 @@ public class data {
 
                 JSONObject levelData = towerData.getJSONObject("levels").getJSONObject(String.valueOf(level));
 
+                StatusType type;
+                switch (towerData.getString("type")){
+                    case "POISON":
+                        type = StatusType.POISON;
+                        break;
+                    case "BURN":
+                        type = StatusType.BURN;
+                        break;
+                    case "FREEZE":
+                        type = StatusType.FREEZE;
+                        break;
+                    default:
+                        type = null;
+                }
+
                 Tower tower = new Tower(
                         tileX,
                         tileY,
-                        towerData.getString("imagePath")
+                        towerData.getString("imagePath"),
+                        Color.decode(towerData.getString("BulletColor")),
+                        type,
+                        name
                 );
 
                 // 設置屬性
@@ -43,6 +62,7 @@ public class data {
                 tower.setRange(levelData.getDouble("range"));
                 tower.setDamage(levelData.getDouble("damage"));
                 tower.setFireRate(levelData.getDouble("fireRate"));
+                tower.setCostMoney(levelData.getInt("cost"));
 
                 return tower;
             }
@@ -60,5 +80,37 @@ public class data {
             }
         }
         return -1;
+    }
+
+    public static JSONObject getTowerLevelData( String towerName ,int level ) {
+        for (int i = 0; i < towerArray.length(); i++) {
+            JSONObject towerData = towerArray.getJSONObject(i);
+            if (towerData.getString("name").equalsIgnoreCase(towerName)) {
+                return  towerData.getJSONObject("levels").getJSONObject(String.valueOf(level));
+            }
+
+        }
+        return null;
+    }
+
+    public static int getTowerCost( String towerName ,int level ) {
+        for (int i = 0; i < towerArray.length(); i++) {
+            JSONObject towerData = towerArray.getJSONObject(i);
+            if (towerData.getString("name").equalsIgnoreCase(towerName)) {
+                JSONObject levelData =  towerData.getJSONObject("levels").getJSONObject(String.valueOf(level));
+                return levelData.getInt("cost");
+            }
+        }
+        return -1;
+    }
+
+    public static String getTowerTypeString( String towerName) {
+        for (int i = 0; i < towerArray.length(); i++) {
+            JSONObject towerData = towerArray.getJSONObject(i);
+            if (towerData.getString("name").equalsIgnoreCase(towerName)) {
+                return towerData.getString("type");
+            }
+        }
+        return null;
     }
 }

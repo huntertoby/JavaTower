@@ -17,7 +17,7 @@ public class ControlButtonsPanel extends JPanel {
 
         timeControlButton = new JButton("開始");
         buyUpgradeButton = new JButton("購買/升級");
-        sellButton = new JButton("賣出");
+        sellButton = new JButton("賣出(8折");
 
         // 添加按鈕事件
         timeControlButton.addActionListener(timeControlListener);

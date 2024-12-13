@@ -3,252 +3,401 @@
         {
             "name": "Basic Tower",
             "imagePath": "asset/tower/tower1.png",
-            "damage": 25.0,
-            "fireRate": 1,
-            "fireCooldown": 0.67,
-            "MaxLevel": 3,
+            "type": "無",
+            "MaxLevel": 5,
+            "BulletColor": "#4DB6AC",
             "levels": {
                 "1": {
                     "range": 150.0,
                     "damage": 10.0,
                     "fireRate": 1.5,
-                    "fireCooldown": 0.67
+                    "fireCooldown": 0.67,
+                    "cost": 100
                 },
                 "2": {
-                    "range": 175.0,
-                    "damage": 12.0,
+                    "range": 170.0,
+                    "damage": 14.0,
+                    "fireRate": 1.7,
+                    "fireCooldown": 0.6,
+                    "cost": 200
+                },
+                "3": {
+                    "range": 190.0,
+                    "damage": 18.0,
+                    "fireRate": 1.9,
+                    "fireCooldown": 0.55,
+                    "cost": 300
+                },
+                "4": {
+                    "range": 210.0,
+                    "damage": 23.0,
+                    "fireRate": 2.1,
+                    "fireCooldown": 0.5,
+                    "cost": 400
+                },
+                "5": {
+                    "range": 230.0,
+                    "damage": 29.0,
+                    "fireRate": 2.4,
+                    "fireCooldown": 0.45,
+                    "cost": 500
+                }
+            }
+        },
+        {
+            "name": "Sniper Tower",
+            "imagePath": "asset/tower/tower2.png",
+            "type": "無",
+            "MaxLevel": 5,
+            "BulletColor": "#81C784",
+            "levels": {
+                "1": {
+                    "range": 200.0,
+                    "damage": 50.0,
+                    "fireRate": 0.5,
+                    "fireCooldown": 2.0,
+                    "cost": 150
+                },
+                "2": {
+                    "range": 220.0,
+                    "damage": 60.0,
+                    "fireRate": 0.55,
+                    "fireCooldown": 1.8,
+                    "cost": 300
+                },
+                "3": {
+                    "range": 240.0,
+                    "damage": 70.0,
+                    "fireRate": 0.6,
+                    "fireCooldown": 1.6,
+                    "cost": 450
+                },
+                "4": {
+                    "range": 260.0,
+                    "damage": 85.0,
+                    "fireRate": 0.7,
+                    "fireCooldown": 1.4,
+                    "cost": 600
+                },
+                "5": {
+                    "range": 280.0,
+                    "damage": 100.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.25,
+                    "cost": 750
+                }
+            }
+        },
+        {
+            "name": "Cannon Tower",
+            "imagePath": "asset/tower/tower3.png",
+            "type": "無",
+            "BulletColor": "#E57373",
+            "levels": {
+                "1": {
+                    "range": 180.0,
+                    "damage": 20.0,
+                    "fireRate": 0.8,
+                    "fireCooldown": 1.5,
+                    "cost": 120
+                },
+                "2": {
+                    "range": 190.0,
+                    "damage": 25.0,
+                    "fireRate": 0.9,
+                    "fireCooldown": 1.4,
+                    "cost": 240
+                },
+                "3": {
+                    "range": 200.0,
+                    "damage": 32.0,
+                    "fireRate": 1.0,
+                    "fireCooldown": 1.3,
+                    "cost": 360
+                },
+                "4": {
+                    "range": 210.0,
+                    "damage": 40.0,
+                    "fireRate": 1.1,
+                    "fireCooldown": 1.2,
+                    "cost": 480
+                },
+                "5": {
+                    "range": 220.0,
+                    "damage": 50.0,
+                    "fireRate": 1.2,
+                    "fireCooldown": 1.1,
+                    "cost": 600
+                }
+            }
+        },
+        {
+            "name": "Flame Tower",
+            "imagePath": "asset/tower/tower4.png",
+            "type": BURN,
+            "MaxLevel": 5,
+            "BulletColor": "#ED1C24",
+            "levels": {
+                "1": {
+                    "range": 120.0,
+                    "damage": 8.0,
+                    "fireRate": 1.0,
+                    "fireCooldown": 0.33,
+                    "cost": 100
+                },
+                "2": {
+                    "range": 130.0,
+                    "damage": 10.0,
+                    "fireRate": 1.2,
+                    "fireCooldown": 0.30,
+                    "cost": 200
+                },
+                "3": {
+                    "range": 140.0,
+                    "damage": 13.0,
+                    "fireRate": 1.4,
+                    "fireCooldown": 0.28,
+                    "cost": 300
+                },
+                "4": {
+                    "range": 150.0,
+                    "damage": 17.0,
+                    "fireRate": 1.6,
+                    "fireCooldown": 0.26,
+                    "cost": 400
+                },
+                "5": {
+                    "range": 160.0,
+                    "damage": 22.0,
                     "fireRate": 1.8,
-                    "fireCooldown": 0.56
-                },
-                "3": {
-                    "range": 200.0,
+                    "fireCooldown": 0.24,
+                    "cost": 500
+                }
+            }
+        },
+        {
+            "name": "Frost Tower",
+            "imagePath": "asset/tower/tower5.png",
+            "type": "FREEZE",
+            "MaxLevel": 5,
+            "BulletColor": "#99D9EA",
+            "levels": {
+                "1": {
+                    "range": 160.0,
                     "damage": 15.0,
-                    "fireRate": 2.0,
-                    "fireCooldown": 0.5
+                    "fireRate": 1.0,
+                    "fireCooldown": 1.0,
+                    "cost": 130
+                },
+                "2": {
+                    "range": 170.0,
+                    "damage": 18.0,
+                    "fireRate": 1.1,
+                    "fireCooldown": 0.9,
+                    "cost": 260
+                },
+                "3": {
+                    "range": 180.0,
+                    "damage": 22.0,
+                    "fireRate": 1.2,
+                    "fireCooldown": 0.8,
+                    "cost": 390
+                },
+                "4": {
+                    "range": 190.0,
+                    "damage": 27.0,
+                    "fireRate": 1.3,
+                    "fireCooldown": 0.7,
+                    "cost": 520
+                },
+                "5": {
+                    "range": 200.0,
+                    "damage": 33.0,
+                    "fireRate": 1.4,
+                    "fireCooldown": 0.6,
+                    "cost": 650
                 }
             }
         },
         {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
+            "name": "Lightning Tower",
+            "imagePath": "asset/tower/tower6.png",
+            "damage": 12.0,
+            "fireRate": 2.5,
+            "fireCooldown": 0.4,
+            "MaxLevel": 5,
             "levels": {
                 "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
+                    "range": 170.0,
+                    "damage": 12.0,
+                    "fireRate": 2.5,
+                    "fireCooldown": 0.4,
+                    "cost": 180
                 },
                 "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
+                    "range": 180.0,
+                    "damage": 15.0,
+                    "fireRate": 2.7,
+                    "fireCooldown": 0.37,
+                    "cost": 360
                 },
                 "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
+                    "range": 190.0,
+                    "damage": 19.0,
+                    "fireRate": 2.9,
+                    "fireCooldown": 0.34,
+                    "cost": 540
+                },
+                "4": {
+                    "range": 200.0,
+                    "damage": 24.0,
+                    "fireRate": 3.1,
+                    "fireCooldown": 0.32,
+                    "cost": 720
+                },
+                "5": {
+                    "range": 210.0,
+                    "damage": 30.0,
+                    "fireRate": 3.3,
+                    "fireCooldown": 0.30,
+                    "cost": 900
                 }
             }
         },
         {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
+            "name": "Poison Tower",
+            "imagePath": "asset/tower/tower7.png",
+            "type": "POISON",
+            "damage": 7.0,
+            "fireRate": 1.2,
+            "fireCooldown": 0.83,
+            "MaxLevel": 5,
+            "BulletColor": "#125E29",
             "levels": {
                 "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
+                    "range": 150.0,
+                    "damage": 7.0,
+                    "fireRate": 1.2,
+                    "fireCooldown": 0.83,
+                    "cost": 110
                 },
                 "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
+                    "range": 160.0,
+                    "damage": 9.0,
+                    "fireRate": 1.3,
+                    "fireCooldown": 0.77,
+                    "cost": 220
                 },
                 "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
+                    "range": 170.0,
+                    "damage": 12.0,
+                    "fireRate": 1.4,
+                    "fireCooldown": 0.71,
+                    "cost": 330
+                },
+                "4": {
+                    "range": 180.0,
+                    "damage": 16.0,
+                    "fireRate": 1.5,
+                    "fireCooldown": 0.67,
+                    "cost": 440
+                },
+                "5": {
+                    "range": 190.0,
+                    "damage": 21.0,
+                    "fireRate": 1.6,
+                    "fireCooldown": 0.63,
+                    "cost": 550
                 }
             }
         },
         {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
+            "name": "Artillery Tower",
+            "imagePath": "asset/tower/tower8.png",
+            "damage": 30.0,
+            "fireRate": 0.7,
+            "fireCooldown": 1.43,
+            "MaxLevel": 5,
             "levels": {
                 "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
+                    "range": 220.0,
+                    "damage": 30.0,
+                    "fireRate": 0.7,
+                    "fireCooldown": 1.43,
+                    "cost": 200
                 },
                 "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
+                    "range": 230.0,
+                    "damage": 38.0,
+                    "fireRate": 0.75,
+                    "fireCooldown": 1.33,
+                    "cost": 400
                 },
                 "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
+                    "range": 240.0,
+                    "damage": 48.0,
                     "fireRate": 0.8,
-                    "fireCooldown": 1.25
+                    "fireCooldown": 1.25,
+                    "cost": 600
+                },
+                "4": {
+                    "range": 250.0,
+                    "damage": 59.0,
+                    "fireRate": 0.85,
+                    "fireCooldown": 1.18,
+                    "cost": 800
+                },
+                "5": {
+                    "range": 260.0,
+                    "damage": 71.0,
+                    "fireRate": 0.9,
+                    "fireCooldown": 1.11,
+                    "cost": 1000
                 }
             }
         },
         {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
+            "name": "Tesla Tower",
+            "imagePath": "asset/tower/tower9.png",
+            "damage": 25.0,
+            "fireRate": 1.0,
+            "fireCooldown": 1.0,
+            "MaxLevel": 5,
             "levels": {
                 "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
+                    "range": 190.0,
+                    "damage": 25.0,
+                    "fireRate": 1.0,
+                    "fireCooldown": 1.0,
+                    "cost": 210
                 },
                 "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
-                },
-                "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
-                }
-            }
-        },
-        {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
-            "levels": {
-                "1": {
                     "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
-                },
-                "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
+                    "damage": 30.0,
+                    "fireRate": 1.1,
+                    "fireCooldown": 0.9,
+                    "cost": 420
                 },
                 "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
-                }
-            }
-        },
-        {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
-            "levels": {
-                "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
+                    "range": 210.0,
+                    "damage": 36.0,
+                    "fireRate": 1.2,
+                    "fireCooldown": 0.83,
+                    "cost": 630
                 },
-                "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
+                "4": {
+                    "range": 220.0,
+                    "damage": 43.0,
+                    "fireRate": 1.3,
+                    "fireCooldown": 0.77,
+                    "cost": 840
                 },
-                "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
-                }
-            }
-        },
-        {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
-            "levels": {
-                "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
-                },
-                "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
-                },
-                "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
-                }
-            }
-        },
-        {
-            "name": "Sniper Tower",
-            "imagePath": "asset/tower/tower2.png",
-            "damage": 50.0,
-            "fireRate": 0.5,
-            "fireCooldown": 2.0,
-            "MaxLevel": 3,
-            "levels": {
-                "1": {
-                    "range": 200.0,
-                    "damage": 50.0,
-                    "fireRate": 0.5,
-                    "fireCooldown": 2.0
-                },
-                "2": {
-                    "range": 250.0,
-                    "damage": 60.0,
-                    "fireRate": 0.6,
-                    "fireCooldown": 1.67
-                },
-                "3": {
-                    "range": 300.0,
-                    "damage": 75.0,
-                    "fireRate": 0.8,
-                    "fireCooldown": 1.25
+                "5": {
+                    "range": 230.0,
+                    "damage": 51.0,
+                    "fireRate": 1.4,
+                    "fireCooldown": 0.71,
+                    "cost": 1050
                 }
             }
         }
